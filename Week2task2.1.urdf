@@ -1,0 +1,406 @@
+<?xml version="1.0"?>
+<robot name="kripa's drone">
+
+  <material name="neon_glow">
+    <color rgba="1 1 0 0.6"/> </material>
+  <material name="chassis_grey">
+    <color rgba="0.3 0.3 0.35 1"/>
+  </material>
+  <material name="motor_black">
+    <color rgba="0.1 0.1 0.1 1"/>
+  </material>
+  <material name="prop_orange">
+    <color rgba="1 0.4 0 1"/>
+  </material>
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+  <material name="glass_canopy">
+    <color rgba="0.8 0.9 1 0.4"/>
+  </material>
+  <material name="led_red">
+    <color rgba="1 0 0 1"/>
+  </material>
+  
+  <material name="led_green">
+    <color rgba="0 0.8 1 1"/> 
+  </material>
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 -0.04" rpy="0 0 0"/>
+      <geometry><box size="0.18 0.12 0.04"/></geometry>
+      <material name="motor_black"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.13" length="0.05"/></geometry>
+      <material name="chassis_grey"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.03" rpy="0 0 0"/>
+      <geometry><sphere radius="0.08"/></geometry>
+      <material name="glass_canopy"/>
+    </visual>
+
+    <visual>
+      <origin xyz="0.3 0.15 0" rpy="0 0 -0.4"/>
+      <geometry><box size="0.20 0.03 0.02"/></geometry>
+      <material name="neon_glow"/>
+    </visual>
+    <visual>
+      <origin xyz="0.3 -0.15 0" rpy="0 0 0.4"/>
+      <geometry><box size="0.20 0.03 0.02"/></geometry>
+      <material name="neon_glow"/>
+    </visual>
+    <visual>
+      <origin xyz="-0.3 0.15 0" rpy="0 0 0.4"/>
+      <geometry><box size="0.20 0.03 0.02"/></geometry>
+      <material name="neon_glow"/>
+    </visual>
+    <visual>
+      <origin xyz="-0.3 -0.15 0" rpy="0 0 -0.4"/>
+      <geometry><box size="0.20 0.03 0.02"/></geometry>
+      <material name="neon_glow"/>
+    </visual>
+    <visual>
+      <origin xyz="0.33 0 0" rpy="0 0 1.57"/>
+      <geometry><box size="0.32 0.03 0.02"/></geometry>
+      <material name="neon_glow"/>
+    </visual>
+    <visual>
+      <origin xyz="-0.33 0 0" rpy="0 0 1.57"/>
+      <geometry><box size="0.32 0.03 0.02"/></geometry>
+      <material name="neon_glow"/>
+    </visual>
+  </link>
+
+  <link name="leg_fl">
+    <visual>
+      <geometry><cylinder radius="0.008" length="0.16"/></geometry>
+      <material name="motor_black"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 -0.08"/>
+      <geometry><cylinder radius="0.02" length="0.01"/></geometry>
+      <material name="chassis_grey"/>
+    </visual>
+  </link>
+  <joint name="base_to_leg_fl" type="fixed">
+    <parent link="base_link"/>
+    <child link="leg_fl"/>
+    <origin xyz="0.12 0.12 -0.09"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="leg_fr">
+    <visual>
+      <geometry><cylinder radius="0.008" length="0.16"/></geometry>
+      <material name="motor_black"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 -0.08"/>
+      <geometry><cylinder radius="0.02" length="0.01"/></geometry>
+      <material name="chassis_grey"/>
+    </visual>
+  </link>
+  <joint name="base_to_leg_fr" type="fixed">
+    <parent link="base_link"/>
+    <child link="leg_fr"/>
+    <origin xyz="0.12 -0.12 -0.09"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="leg_bl">
+    <visual>
+      <geometry><cylinder radius="0.008" length="0.16"/></geometry>
+      <material name="motor_black"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 -0.08"/>
+      <geometry><cylinder radius="0.02" length="0.01"/></geometry>
+      <material name="chassis_grey"/>
+    </visual>
+  </link>
+  <joint name="base_to_leg_bl" type="fixed">
+    <parent link="base_link"/>
+    <child link="leg_bl"/>
+    <origin xyz="-0.12 0.12 -0.09"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="leg_br">
+    <visual>
+      <geometry><cylinder radius="0.008" length="0.16"/></geometry>
+      <material name="motor_black"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 -0.08"/>
+      <geometry><cylinder radius="0.02" length="0.01"/></geometry>
+      <material name="chassis_grey"/>
+    </visual>
+  </link>
+  <joint name="base_to_leg_br" type="fixed">
+    <parent link="base_link"/>
+    <child link="leg_br"/>
+    <origin xyz="-0.12 -0.12 -0.09"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+
+  <link name="arm_fl_inner">
+    <visual>
+      <origin xyz="0.17 0 0"/>
+      <geometry><box size="0.34 0.03 0.02"/></geometry>
+      <material name="chassis_grey"/>
+    </visual>
+    <visual>
+      <origin xyz="0.2 0 0.015"/>
+      <geometry><sphere radius="0.01"/></geometry>
+      <material name="led_red"/>
+    </visual>
+  </link>
+  <joint name="base_to_fl" type="fixed">
+    <parent link="base_link"/>
+    <child link="arm_fl_inner"/>
+    <origin xyz="0 0 0" rpy="0 0 0.785"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="arm_fl_outer">
+    <visual>
+      <origin xyz="0.11 0 0"/>
+      <geometry><box size="0.22 0.03 0.02"/></geometry>
+      <material name="chassis_grey"/>
+    </visual>
+  </link>
+
+  <joint name="joint 1" type="continuous">
+    <parent link="arm_fl_inner"/>
+    <child link="arm_fl_outer"/>
+    <origin xyz="0.34 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="prop_fl">
+    <visual>
+      <origin xyz="0 0 -0.03"/>
+      <geometry><cylinder radius="0.03" length="0.04"/></geometry>
+      <material name="motor_black"/>
+    </visual>
+    <visual>
+      <geometry><box size="0.26 0.025 0.004"/></geometry>
+      <material name="prop_orange"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 1.57"/>
+      <geometry><box size="0.26 0.025 0.004"/></geometry>
+      <material name="prop_orange"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.005"/>
+      <geometry><cylinder radius="0.01" length="0.01"/></geometry>
+      <material name="white"/>
+    </visual>
+  </link>
+
+  <joint name="prop 1" type="continuous">
+    <axis xyz="0 0 1"/>
+    <parent link="arm_fl_outer"/>
+    <child link="prop_fl"/>
+    <origin xyz="0.22 0 0.02"/>
+  </joint>
+
+
+  <link name="arm_fr_inner">
+    <visual>
+      <origin xyz="0.17 0 0"/>
+      <geometry><box size="0.34 0.03 0.02"/></geometry>
+      <material name="chassis_grey"/>
+    </visual>
+    <visual>
+      <origin xyz="0.2 0 0.015"/>
+      <geometry><sphere radius="0.01"/></geometry>
+      <material name="led_green"/>
+    </visual>
+  </link>
+  <joint name="base_to_fr" type="fixed">
+    <parent link="base_link"/>
+    <child link="arm_fr_inner"/>
+    <origin xyz="0 0 0" rpy="0 0 -0.785"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="arm_fr_outer">
+    <visual>
+      <origin xyz="0.11 0 0"/>
+      <geometry><box size="0.22 0.03 0.02"/></geometry>
+      <material name="chassis_grey"/>
+    </visual>
+  </link>
+
+  <joint name="joint 2" type="continuous">
+    <parent link="arm_fr_inner"/>
+    <child link="arm_fr_outer"/>
+    <origin xyz="0.34 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="prop_fr">
+    <visual>
+      <origin xyz="0 0 -0.03"/>
+      <geometry><cylinder radius="0.03" length="0.04"/></geometry>
+      <material name="motor_black"/>
+    </visual>
+    <visual>
+      <geometry><box size="0.26 0.025 0.004"/></geometry>
+      <material name="prop_orange"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 1.57"/>
+      <geometry><box size="0.26 0.025 0.004"/></geometry>
+      <material name="prop_orange"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.005"/>
+      <geometry><cylinder radius="0.01" length="0.01"/></geometry>
+      <material name="white"/>
+    </visual>
+  </link>
+
+  <joint name="prop 2" type="continuous">
+    <axis xyz="0 0 1"/>
+    <parent link="arm_fr_outer"/>
+    <child link="prop_fr"/>
+    <origin xyz="0.22 0 0.02"/>
+  </joint>
+
+
+  <link name="arm_bl_inner">
+    <visual>
+      <origin xyz="0.17 0 0"/>
+      <geometry><box size="0.34 0.03 0.02"/></geometry>
+      <material name="chassis_grey"/>
+    </visual>
+    <visual>
+      <origin xyz="0.2 0 0.015"/>
+      <geometry><sphere radius="0.01"/></geometry>
+      <material name="led_red"/>
+    </visual>
+  </link>
+  <joint name="base_to_bl" type="fixed">
+    <parent link="base_link"/>
+    <child link="arm_bl_inner"/>
+    <origin xyz="0 0 0" rpy="0 0 2.356"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="arm_bl_outer">
+    <visual>
+      <origin xyz="0.11 0 0"/>
+      <geometry><box size="0.22 0.03 0.02"/></geometry>
+      <material name="chassis_grey"/>
+    </visual>
+  </link>
+
+  <joint name="joint 3" type="continuous">
+    <parent link="arm_bl_inner"/>
+    <child link="arm_bl_outer"/>
+    <origin xyz="0.34 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="prop_bl">
+    <visual>
+      <origin xyz="0 0 -0.03"/>
+      <geometry><cylinder radius="0.03" length="0.04"/></geometry>
+      <material name="motor_black"/>
+    </visual>
+    <visual>
+      <geometry><box size="0.26 0.025 0.004"/></geometry>
+      <material name="prop_orange"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 1.57"/>
+      <geometry><box size="0.26 0.025 0.004"/></geometry>
+      <material name="prop_orange"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.005"/>
+      <geometry><cylinder radius="0.01" length="0.01"/></geometry>
+      <material name="white"/>
+    </visual>
+  </link>
+
+  <joint name="prop 3" type="continuous">
+    <axis xyz="0 0 1"/>
+    <parent link="arm_bl_outer"/>
+    <child link="prop_bl"/>
+    <origin xyz="0.22 0 0.02"/>
+  </joint>
+
+
+  <link name="arm_br_inner">
+    <visual>
+      <origin xyz="0.17 0 0"/>
+      <geometry><box size="0.34 0.03 0.02"/></geometry>
+      <material name="chassis_grey"/>
+    </visual>
+    <visual>
+      <origin xyz="0.2 0 0.015"/>
+      <geometry><sphere radius="0.01"/></geometry>
+      <material name="led_green"/>
+    </visual>
+  </link>
+  <joint name="base_to_br" type="fixed">
+    <parent link="base_link"/>
+    <child link="arm_br_inner"/>
+    <origin xyz="0 0 0" rpy="0 0 -2.356"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="arm_br_outer">
+    <visual>
+      <origin xyz="0.11 0 0"/>
+      <geometry><box size="0.22 0.03 0.02"/></geometry>
+      <material name="chassis_grey"/>
+    </visual>
+  </link>
+
+  <joint name="joint 4" type="continuous">
+    <parent link="arm_br_inner"/>
+    <child link="arm_br_outer"/>
+    <origin xyz="0.34 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="prop_br">
+    <visual>
+      <origin xyz="0 0 -0.03"/>
+      <geometry><cylinder radius="0.03" length="0.04"/></geometry>
+      <material name="motor_black"/>
+    </visual>
+    <visual>
+      <geometry><box size="0.26 0.025 0.004"/></geometry>
+      <material name="prop_orange"/>
+    </visual>
+    <visual>
+      <origin rpy="0 0 1.57"/>
+      <geometry><box size="0.26 0.025 0.004"/></geometry>
+      <material name="prop_orange"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.005"/>
+      <geometry><cylinder radius="0.01" length="0.01"/></geometry>
+      <material name="white"/>
+    </visual>
+  </link>
+
+  <joint name="prop 4" type="continuous">
+    <axis xyz="0 0 1"/>
+    <parent link="arm_br_outer"/>
+    <child link="prop_br"/>
+    <origin xyz="0.22 0 0.02"/>
+  </joint>
+
+</robot>
